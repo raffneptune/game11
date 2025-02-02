@@ -1,0 +1,1058 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600);
+
+body {
+  background: #272727;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hero {
+  position: absolute;
+  display: block;
+  left: 275px;
+  bottom: calc(10% - 25px);
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: #4CC3D9;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 4px #2aafc8;
+  z-index: 8;
+  transform-origin: 50% 50%;
+}
+
+.active #hero {
+  -webkit-animation: dance 0.5173305742s alternate linear infinite;
+  animation: dance 0.5173305742s alternate linear infinite;
+}
+
+#bloodshed {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+figure#context {
+  position: absolute;
+  left: calc(50% - 300px);
+  top: calc(50% - 300px);
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+figure#context::before {
+  background: url(images/baddies.jpg);
+  filter: blur(1px);
+  content: "";
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+div.level-notify {
+  position: absolute;
+  text-align: center;
+  bottom: calc(10% + 30px);
+  left: 50%;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) translateZ(0) scale(1.2);
+  -webkit-animation: level-enter 2000ms ease-in forwards;
+  animation: level-enter 2000ms ease-in forwards;
+  font-size: 2rem;
+  color: #2aafc8;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2);
+  line-height: 1;
+}
+
+div.screen {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  height: 100%;
+  flex-direction: column;
+  transition: opacity 250ms ease-out;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  line-height: 1.6;
+}
+
+div.screen header,
+div.screen main,
+div.screen footer {
+  margin: 1rem auto;
+  width: 90%;
+  overflow: auto;
+}
+
+div.screen footer {
+  margin-top: 2rem;
+}
+
+div.screen header {
+  padding-top: 2rem;
+}
+
+div.screen h1,
+div.screen h2,
+div.screen button {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+div.screen footer>div {
+  text-align: center;
+  padding: 0.5rem 0 0;
+}
+
+div.screen footer>div label,
+div.screen footer>div input {
+  display: block;
+  margin: 0 auto;
+}
+
+div.screen footer>div label {
+  margin-bottom: 0.25rem;
+}
+
+div.screen footer>div input {
+  background: #404040;
+  border: none;
+  text-align: center;
+  width: 40px;
+  padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+div.screen ol {
+  width: 70%;
+  margin: 1rem auto;
+}
+
+div.screen header,
+div.screen h2,
+div.screen p,
+div.screen footer {
+  text-align: center;
+}
+
+div.screen.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+div.screen button {
+  background: #7BC8A4;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: #57b98b;
+  padding: 1rem 2rem;
+}
+
+div.screen button:hover,
+div.screen button:active {
+  background: #57b98b;
+}
+
+#result,
+.result {
+  width: 100%;
+  overflow: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#result ul,
+.result ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#result li,
+.result li {
+  min-width: 13.985714%;
+}
+
+#result li.full,
+.result li.full {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+#result span,
+.result span {
+  display: block;
+}
+
+#result span.label,
+.result span.label {
+  font-weight: bold;
+  margin-right: 0.2em;
+}
+
+#result span.code,
+.result span.code {
+  display: block;
+  white-space: pre;
+}
+
+span.projectile {
+  position: absolute;
+  display: block;
+  top: -5px;
+  left: -5px;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background: #FFC65D;
+  transform-origin: 50% 50%;
+  transform: translate3d(0, 0, 0);
+  transition: transform 200ms linear;
+  z-index: 7;
+}
+
+div.baddie {
+  position: absolute;
+  background: rgba(39, 39, 39, 0.5);
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;
+  transform: translate3d(300px, -100px, 0);
+  transform-origin: 50% 50%;
+  padding: 0.2em 0.4em;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  opacity: 0;
+  -webkit-animation: enter 500ms ease-out forwards;
+  animation: enter 500ms ease-out forwards;
+  transition: transform 200ms linear;
+}
+
+div.baddie.active {
+  z-index: 9;
+  background: rgba(39, 39, 39, 0.9);
+}
+
+div.baddie span.hit {
+  color: #F16745;
+  -webkit-animation: hit 200ms ease-in-out;
+  animation: hit 200ms ease-in-out;
+}
+
+div.baddie.killed {
+  -webkit-animation: kill 300ms ease-in forwards;
+  animation: kill 300ms ease-in forwards;
+}
+
+div.baddie.baddie-lvl-1 {
+  font-size: 0.72rem;
+}
+
+span.projectile-1 {
+  -webkit-animation: explode-1 200ms ease-in-out 200ms forwards;
+  animation: explode-1 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-1:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-1-after 200ms ease-in-out 200ms forwards;
+  animation: explode-1-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-1 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-1 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-1-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-1-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-2 {
+  font-size: 0.84rem;
+}
+
+span.projectile-2 {
+  -webkit-animation: explode-2 200ms ease-in-out 200ms forwards;
+  animation: explode-2 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-2:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-2-after 200ms ease-in-out 200ms forwards;
+  animation: explode-2-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-2 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-2 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-2-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-2-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-3 {
+  font-size: 0.96rem;
+}
+
+span.projectile-3 {
+  -webkit-animation: explode-3 200ms ease-in-out 200ms forwards;
+  animation: explode-3 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-3:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-3-after 200ms ease-in-out 200ms forwards;
+  animation: explode-3-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-3 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-3 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-3-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-3-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-4 {
+  font-size: 1.08rem;
+}
+
+span.projectile-4 {
+  -webkit-animation: explode-4 200ms ease-in-out 200ms forwards;
+  animation: explode-4 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-4:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-4-after 200ms ease-in-out 200ms forwards;
+  animation: explode-4-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-4 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-4 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-4-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-4-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-5 {
+  font-size: 1.2rem;
+}
+
+span.projectile-5 {
+  -webkit-animation: explode-5 200ms ease-in-out 200ms forwards;
+  animation: explode-5 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-5:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-5-after 200ms ease-in-out 200ms forwards;
+  animation: explode-5-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-5 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-5 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-5-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-5-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-6 {
+  font-size: 1.32rem;
+}
+
+span.projectile-6 {
+  -webkit-animation: explode-6 200ms ease-in-out 200ms forwards;
+  animation: explode-6 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-6:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-6-after 200ms ease-in-out 200ms forwards;
+  animation: explode-6-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-6 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-6 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-6-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-6-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-7 {
+  font-size: 1.44rem;
+}
+
+span.projectile-7 {
+  -webkit-animation: explode-7 200ms ease-in-out 200ms forwards;
+  animation: explode-7 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-7:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-7-after 200ms ease-in-out 200ms forwards;
+  animation: explode-7-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-7 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-7 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-7-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-7-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-8 {
+  font-size: 1.56rem;
+}
+
+span.projectile-8 {
+  -webkit-animation: explode-8 200ms ease-in-out 200ms forwards;
+  animation: explode-8 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-8:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-8-after 200ms ease-in-out 200ms forwards;
+  animation: explode-8-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-8 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-8 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-8-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-8-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-9 {
+  font-size: 1.68rem;
+}
+
+span.projectile-9 {
+  -webkit-animation: explode-9 200ms ease-in-out 200ms forwards;
+  animation: explode-9 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-9:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-9-after 200ms ease-in-out 200ms forwards;
+  animation: explode-9-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-9 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-9 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-9-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-9-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+div.baddie.baddie-lvl-10 {
+  font-size: 1.8rem;
+}
+
+span.projectile-10 {
+  -webkit-animation: explode-10 200ms ease-in-out 200ms forwards;
+  animation: explode-10 200ms ease-in-out 200ms forwards;
+}
+
+span.projectile-10:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(237, 64, 22, 0.02);
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) scale(0.01);
+  -webkit-animation: explode-10-after 200ms ease-in-out 200ms forwards;
+  animation: explode-10-after 200ms ease-in-out 200ms forwards;
+}
+
+@-webkit-keyframes explode-10 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@keyframes explode-10 {
+  to {
+    background: rgba(255, 180, 42, 0.02);
+    background: rgba(255, 180, 42, 0);
+  }
+}
+
+@-webkit-keyframes explode-10-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+@keyframes explode-10-after {
+  from {
+    transform: translate(-50%, -50%) scale(0.01);
+    background: #ffb42a;
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    background: rgba(237, 64, 22, 0.02);
+  }
+}
+
+#audio-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#audio-toggle svg {
+  fill: white;
+  stroke: white;
+  width: 30px;
+  height: auto;
+}
+
+#audio-toggle .on {
+  display: block;
+}
+
+#audio-toggle .off {
+  display: none;
+}
+
+#audio-toggle.muted .on {
+  display: none;
+}
+
+#audio-toggle.muted .off {
+  display: block;
+}
+
+@-webkit-keyframes hit {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes hit {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@-webkit-keyframes kill {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes kill {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes enter {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes enter {
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes dance {
+  from {
+    transform: skew(2deg, 2deg) scale(0.95);
+  }
+
+  to {
+    transform: skew(-2deg, -2deg) scale(1.05);
+  }
+}
+
+@keyframes dance {
+  from {
+    transform: skew(2deg, 2deg) scale(0.95);
+  }
+
+  to {
+    transform: skew(-2deg, -2deg) scale(1.05);
+  }
+}
+
+@-webkit-keyframes dance-bg {
+  from {
+    left: 0;
+    right: 0;
+  }
+
+  to {
+    left: -0.25rem;
+    right: -0.25rem;
+  }
+}
+
+@keyframes dance-bg {
+  from {
+    left: 0;
+    right: 0;
+  }
+
+  to {
+    left: -0.25rem;
+    right: -0.25rem;
+  }
+}
+
+@-webkit-keyframes level-enter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(0) scale(1.2);
+  }
+
+  30%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateZ(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(0) scale(1);
+  }
+}
+
+@keyframes level-enter {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(0) scale(1.2);
+  }
+
+  30%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateZ(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateZ(0) scale(1);
+  }
+}

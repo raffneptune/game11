@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+
+
+  <title>Raff | Words Killer</title>
+  
+  <link rel="stylesheet" href="css/1.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/2.css">
+  <link rel="shortcut icon" href="./Images/♡ Anime pfp♡.jpeg" type="image/x-icon" />
+
+  
+  
+
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" style="overflow: hidden;" >
+  <figure id="context">
+  <div class="screen active" id="start-screen">
+    <header>
+      <h1>Coder Kill Words: The Game</h1>
+      <p style="margin-top: -15px;">Your mission: Kill the words.</p>
+    </header>      
+    <main>
+      <h2>Killing instructions</h2>
+      <ol>
+        <li>Mash the name of what you want to kill with your killing fingers on your killing keyboard.</li>
+        <li>Revel in victory!</li>
+      </ol>
+    </main>
+    <footer>
+      <button id="start">Start</button>
+      <div>
+        <label for="level">Level</label>
+        <input type="number" step="1" min="1" max="50" id="level" value="1">
+      </div>
+    </footer>      
+  </div>
+  <div class="screen" id="end-screen">
+    <header>
+      <h1>Well done, soldier.</h1>
+    </header>      
+    <main>
+      <div id="result"></div>
+    </main>
+    <footer>
+      <button id="start-over">Again</button>
+      <div>
+        <label for="level">Level</label>
+        <input type="number" step="1" min="1" max="50" id="level-again" value="1">
+      </div>
+    </footer>      
+  </div>
+  <canvas id="bloodshed" width="600" height="600"></canvas>
+  <div id="projectiles"></div>
+  <div id="baddies"></div>
+  <span id="hero"></div>
+</figure>  
+<button id="audio-toggle">
+  <svg class="on" xmlns="http://www.w3.org/2000/svg" version="1" width="400pt" height="400pt" viewBox="0 0 75 75">
+    <g stroke-width="5">
+      <path stroke-linejoin="round" d="M39.39 13.77L22.234 28.605H6V47.7h15.99l17.4 15.05V13.77z"/>
+      <path d="M48.128 49.03c1.93-3.096 3.062-6.74 3.062-10.653 0-3.978-1.164-7.674-3.147-10.8M55.082 20.537c3.695 4.986 5.884 11.157 5.884 17.84 0 6.62-2.15 12.738-5.788 17.7M61.71 62.61c5.267-6.665 8.418-15.08 8.418-24.232 0-9.217-3.192-17.682-8.52-24.368" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+  <svg class="off" xmlns="http://www.w3.org/2000/svg" version="1" width="400pt" height="400pt" viewBox="0 0 75 75">
+    <g stroke-width="5">
+      <path stroke-linejoin="round" d="M39.39 13.77L22.234 28.605H6V47.7h15.99l17.4 15.05V13.77z"/>
+      <path d="M48.652 50.27l20.743-24.3M69.395 50.27l-20.743-24.3" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</button>
+   
+
+  
+      <script id="rendered-js" src="javascript/1.js">
+
+    </script>
+
+  
+
+</body>
+
+</html>
+ 
